@@ -9,7 +9,8 @@ public class Turn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_turn;
+    @Column(name = "id_turn")
+    private Long idTurn;
 
     private LocalDate day;
 
@@ -19,28 +20,31 @@ public class Turn {
 
     @ManyToOne
     @JoinColumn(name = "id_turn_status", nullable = false)
-    private TurnStatus turn_status;
+    private TurnStatus turnStatus;
 
     @ManyToOne
     @JoinColumn(name = "id_patient", nullable = false)
     private Patient patient;
 
+    @OneToOne
+    private Turn reprogramedTurn;
+
     public Turn() {
     }
 
-    public Turn(LocalDate day, Diary diary, TurnStatus turn_status, Patient patient) {
+    public Turn(LocalDate day, Diary diary, TurnStatus turnStatus, Patient patient) {
         this.day = day;
         this.diary = diary;
-        this.turn_status = turn_status;
+        this.turnStatus = turnStatus;
         this.patient = patient;
     }
 
-    public Long getId_turn() {
-        return id_turn;
+    public Long getIdTurn() {
+        return idTurn;
     }
 
-    public void setId_turn(Long id_turn) {
-        this.id_turn = id_turn;
+    public void setIdTurn(Long id_turn) {
+        this.idTurn = id_turn;
     }
 
     public LocalDate getDay() {
@@ -51,27 +55,35 @@ public class Turn {
         this.day = day;
     }
 
-    /*public Diary getDiary() {
+    public Diary getDiary() {
         return diary;
-    }*/
+    }
 
     public void setDiary(Diary diary) {
         this.diary = diary;
     }
 
-    public TurnStatus getTurn_status() {
-        return turn_status;
+    public TurnStatus getTurnStatus() {
+        return turnStatus;
     }
 
-    public void setTurn_status(TurnStatus turn_status) {
-        this.turn_status = turn_status;
+    public void setTurnStatus(TurnStatus turn_status) {
+        this.turnStatus = turn_status;
     }
 
-    /*public Patient getPatient() {
+    public Patient getPatient() {
         return patient;
-    }*/
+    }
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Turn getReprogramedTurn() {
+        return reprogramedTurn;
+    }
+
+    public void setReprogramedTurn(Turn reprogramedTurn) {
+        this.reprogramedTurn = reprogramedTurn;
     }
 }

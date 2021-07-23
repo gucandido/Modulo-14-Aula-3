@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,6 +44,42 @@ public class TestController {
     @GetMapping("dentist/day")
     public ResponseEntity<?> getDentistsByDayHavingTwoMore(){
         return new ResponseEntity<>(dentistService.getAllByDayHavingTwoMore(LocalDate.of(2021,Month.JULY,24)), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("turns/finalized")
+    public ResponseEntity<?> getFinalizedTurns(){
+        return new ResponseEntity<>(turnService.getFinalizedTurns(), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("turns/pendent")
+    public ResponseEntity<?> getPendentTurns(){
+        return new ResponseEntity<>(turnService.getOneDayPendentTurns(), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("turns/reprogrammed")
+    public ResponseEntity<?> getReprogrammedTurns(){
+        return new ResponseEntity<>(turnService.getAllReprogrammed(), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("turns/reprogrammed/{idDentist}")
+    public ResponseEntity<?> getReprogrammedTurnsByDentist(@PathVariable Long idDentist){
+        return new ResponseEntity<>(turnService.getAllReprogrammedByDentist(idDentist), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("turns/reprogram/{idPatient}/{idTurn}")
+    public ResponseEntity<?> postReprogramTurn(@PathVariable Long idPatient,@PathVariable Long idTurn){
+
+        Turn trOld = turnService.getById(idTurn);
+        Turn trNew = new Turn(LocalDate.of(2021,Month.AUGUST,23),trOld.getDiary(),turnStatusService.getById(3L),trOld.getPatient());
+
+        trOld.setTurnStatus(turnStatusService.getById(2L));
+        trNew.setReprogramedTurn(trOld);
+
+        turnService.saveTurn(trOld);
+        turnService.saveTurn(trNew);
+
+        return new ResponseEntity<>("ok", HttpStatus.CREATED);
+
     }
 
     @PostMapping("post")
@@ -87,13 +121,17 @@ public class TestController {
         Diary dr1 = new Diary(LocalDateTime.of(2021,Month.JULY,24,15,30),LocalDateTime.of(2021,Month.JULY,24,16,00),d1);
 
         Turn tr1 = new Turn(LocalDate.of(2021,Month.JULY,24),dr1,t3,p1);
-        Turn tr2 = new Turn(LocalDate.of(2021,Month.JULY,24),dr1,t3,p2);
+        Turn tr2 = new Turn(LocalDate.of(2021,Month.JULY,22),dr1,t3,p2);
+        Turn tr3 = new Turn(LocalDate.of(2021,Month.JULY,24),dr1,t1,p3);
+        Turn tr4 = new Turn(LocalDate.of(2021,Month.JULY,22),dr1,t2,p3);
 
         diaryService.createNewDiary(dr1);
-        turnService.createNewTurn(tr1);
-        turnService.createNewTurn(tr2);
+        turnService.saveTurn(tr1);
+        turnService.saveTurn(tr2);
+        turnService.saveTurn(tr3);
+        turnService.saveTurn(tr4);
 
-        return new ResponseEntity<>("ok", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("ok", HttpStatus.CREATED);
 
     }
 

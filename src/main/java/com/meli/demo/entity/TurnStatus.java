@@ -15,7 +15,7 @@ public class TurnStatus {
 
     private String description;
 
-    @OneToMany(mappedBy = "turn_status")
+    @OneToMany(mappedBy = "turnStatus")
     private List<Turn> turns;
 
     public TurnStatus() {
