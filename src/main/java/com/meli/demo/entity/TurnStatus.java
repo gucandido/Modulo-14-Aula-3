@@ -15,7 +15,7 @@ public class TurnStatus {
 
     private String description;
 
-    @OneToMany(mappedBy = "turn_status")
+    @OneToMany(mappedBy = "turnStatus")
     private List<Turn> turns;
 
     public TurnStatus() {
@@ -50,9 +50,9 @@ public class TurnStatus {
         this.description = description;
     }
 
-    public List<Turn> getTurns() {
+    /*public List<Turn> getTurns() {
         return turns;
-    }
+    }*/
 
     public void setTurns(List<Turn> turns) {
         this.turns = turns;

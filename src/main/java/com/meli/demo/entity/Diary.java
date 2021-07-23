@@ -19,7 +19,7 @@ public class Diary {
     @JoinColumn(name = "id_dentist", nullable = false)
     private Dentist dentist;
 
-    @OneToMany(mappedBy = "id_turn")
+    @OneToMany(mappedBy = "idTurn")
     private List<Turn> turns;
 
     public Diary() {
