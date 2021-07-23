@@ -1,6 +1,5 @@
 package com.meli.demo.dto;
 
-import com.meli.demo.entity.Dentist;
 import com.meli.demo.entity.Diary;
 
 import java.time.LocalDateTime;

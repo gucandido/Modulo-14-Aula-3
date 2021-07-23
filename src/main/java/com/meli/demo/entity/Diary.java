@@ -16,10 +16,10 @@ public class Diary {
     private LocalDateTime ending_time;
 
     @ManyToOne
-    @JoinColumn(name = "id_dentist", nullable = false)
+    @JoinColumn(name = "idDentist", nullable = false)
     private Dentist dentist;
 
-    @OneToMany(mappedBy = "idTurn")
+    @OneToMany(mappedBy = "diary")
     private List<Turn> turns;
 
     public Diary() {

@@ -18,7 +18,7 @@ public class DiaryService {
         this.repository = repository;
     }
 
-    public void createNewDiary(Diary diary){
+    public void saveDiary(Diary diary){
         repository.save(diary);
     }
 
