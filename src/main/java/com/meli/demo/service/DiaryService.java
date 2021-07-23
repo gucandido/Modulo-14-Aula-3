@@ -1,5 +1,6 @@
 package com.meli.demo.service;
 
+import com.meli.demo.entity.Dentist;
 import com.meli.demo.entity.Diary;
 import com.meli.demo.repository.DiaryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class DiaryService {
 
     public List<Diary> getAll(){
         return repository.findAll();
+    }
+
+    public List<Diary> getAllByDentist(Dentist d){
+        return repository.findDiariesByDentist(d);
     }
 
 }
