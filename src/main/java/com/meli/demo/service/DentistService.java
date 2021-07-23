@@ -18,7 +18,7 @@ public class DentistService {
         this.repository = repository;
     }
 
-    public void createNewDentist(Dentist dentist){
+    public void saveDentist(Dentist dentist){
         repository.save(dentist);
     }
 

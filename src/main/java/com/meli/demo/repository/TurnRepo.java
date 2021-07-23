@@ -24,7 +24,7 @@ public interface TurnRepo extends JpaRepository<Turn, Long> {
     @Query("select t " +
             "from Turn t join Turn tr on t.reprogramedTurn.idTurn = tr.idTurn "+
                         "join Diary d on t.diary.id_diary = d.id_diary " +
-            "where d.dentist.id_dentist = :idDentist " +
+            "where d.dentist.idDentist = :idDentist " +
             "order by t.day")
     public List<Turn> findReprogrammedTurnsByDentist(@Param("idDentist") Long idDentist);
 

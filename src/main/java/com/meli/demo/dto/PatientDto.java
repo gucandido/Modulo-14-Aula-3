@@ -1,16 +1,11 @@
-package com.meli.demo.entity;
+package com.meli.demo.dto;
 
-import javax.persistence.*;
+import com.meli.demo.entity.Patient;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "patient")
-public class Patient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_patient;
+public class PatientDto {
 
     private String name;
 
@@ -26,28 +21,19 @@ public class Patient {
 
     private String email;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Turn> turns;
+    private List<TurnDto> turns = new ArrayList<>();
 
-    public Patient() {
-    }
+    public PatientDto(Patient p) {
+        this.name = p.getName();
+        this.last_name = p.getLast_name();
+        this.address = p.getAddress();
+        this.dni = p.getDni();
+        this.birth_date = p.getBirth_date();
+        this.phone = p.getPhone();
+        this.email = p.getEmail();
 
-    public Patient(String name, String last_name, String address, String dni, LocalDate birth_date, String phone, String email) {
-        this.name = name;
-        this.last_name = last_name;
-        this.address = address;
-        this.dni = dni;
-        this.birth_date = birth_date;
-        this.phone = phone;
-        this.email = email;
-    }
+        p.getTurns().forEach(x->this.turns.add(TurnDto.classToDto(x)));
 
-    public Long getId_patient() {
-        return id_patient;
-    }
-
-    public void setId_patient(Long id_patient) {
-        this.id_patient = id_patient;
     }
 
     public String getName() {
@@ -106,12 +92,15 @@ public class Patient {
         this.email = email;
     }
 
-    public List<Turn> getTurns() {
+    public List<TurnDto> getTurns() {
         return turns;
     }
 
-    public void setTurns(List<Turn> turns) {
+    public void setTurns(List<TurnDto> turns) {
         this.turns = turns;
     }
 
+    public static PatientDto classToDto(Patient p){
+        return p==null?null:new PatientDto(p);
+    }
 }
