@@ -29,4 +29,8 @@ public class TurnStatusService {
         return repository.findAll();
     }
 
+    public TurnStatus getById(Long id){
+        return repository.findById(id).orElse(null);
+    }
+
 }
