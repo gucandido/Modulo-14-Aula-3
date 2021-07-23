@@ -1,5 +1,9 @@
 package com.meli.demo.controller;
 
+import com.meli.demo.dto.DentistDto;
+import com.meli.demo.dto.DiaryDto;
+import com.meli.demo.dto.PatientDto;
+import com.meli.demo.dto.TurnDto;
 import com.meli.demo.entity.*;
 import com.meli.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class TestController {
+public class AppController {
 
     @Autowired
     private DentistService dentistService;
@@ -33,48 +39,93 @@ public class TestController {
 
     @GetMapping("dentist")
     public ResponseEntity<?> getDentists(){
-        return new ResponseEntity<>(dentistService.getAll(), HttpStatus.ACCEPTED);
+
+        List<DentistDto> list = new ArrayList<>();
+
+        dentistService.getAll().forEach(x->list.add(DentistDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
     }
 
     // 1 - Listar todos os pacientes atendidos, em um dia, por todos os dentistas.
     @GetMapping("patients")
     public ResponseEntity<?> getPatients(){
-        return new ResponseEntity<>(patientService.getAllByDay(LocalDate.of(2021,Month.JULY,24)), HttpStatus.ACCEPTED);
+
+        List<PatientDto> list = new ArrayList<>();
+
+        patientService.getAllByDay(LocalDate.of(2021,Month.JULY,24)).forEach(x->list.add(PatientDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
+
     }
 
     // 2 - Listar todos os dentistas que tenham mais de dois turnos em uma data
     @GetMapping("dentist/day")
     public ResponseEntity<?> getDentistsByDayHavingTwoMore(){
-        return new ResponseEntity<>(dentistService.getAllByDayHavingTwoMore(LocalDate.of(2021,Month.JULY,24)), HttpStatus.ACCEPTED);
+
+        List<DentistDto> list = new ArrayList<>();
+
+        dentistService.getAllByDayHavingTwoMore(LocalDate.of(2021,Month.JULY,24)).forEach(x->list.add(DentistDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
+
     }
 
     // 3 - Listar todos os turnos com status finalizado
     @GetMapping("turns/finalized")
     public ResponseEntity<?> getFinalizedTurns(){
-        return new ResponseEntity<>(turnService.getFinalizedTurns(), HttpStatus.ACCEPTED);
+
+        List<TurnDto> list = new ArrayList<>();
+
+        turnService.getFinalizedTurns().forEach(x->list.add(TurnDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
+
     }
 
     // 4 - Listar todos os turnos com estado pendente de um dia
     @GetMapping("turns/pendent")
     public ResponseEntity<?> getPendentTurns(){
-        return new ResponseEntity<>(turnService.getOneDayPendentTurns(), HttpStatus.ACCEPTED);
+
+        List<TurnDto> list = new ArrayList<>();
+
+        turnService.getOneDayPendentTurns().forEach(x->list.add(TurnDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
+
     }
 
     // 5 - Listar a agenda de um dentista
     @GetMapping("diarys/{idDentist}")
     public ResponseEntity<?> getDiarysByDentist(@PathVariable Long idDentist){
-        return new ResponseEntity<>(diaryService.getAllByDentist(dentistService.getDentistById(idDentist)), HttpStatus.ACCEPTED);
+
+        List<DiaryDto> list = new ArrayList<>();
+
+        diaryService.getAllByDentist(dentistService.getDentistById(idDentist)).forEach(x->list.add(DiaryDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
+
     }
 
     // 6 - Listar todos os turnos que foram remarcados de um dentista
     @GetMapping("turns/reprogrammed/{idDentist}")
     public ResponseEntity<?> getReprogrammedTurnsByDentist(@PathVariable Long idDentist){
-        return new ResponseEntity<>(turnService.getAllReprogrammedByDentist(idDentist), HttpStatus.ACCEPTED);
+
+        List<TurnDto> list = new ArrayList<>();
+
+        turnService.getAllReprogrammedByDentist(idDentist).forEach(x->list.add(TurnDto.classToDto(x)));
+
+        return new ResponseEntity<>(list, HttpStatus.ACCEPTED);
     }
 
     // 7 - Listar todos os turnos que foram remarcados . (extra)
     @GetMapping("turns/reprogrammed")
     public ResponseEntity<?> getReprogrammedTurns(){
+
+        List<TurnDto> list = new ArrayList<>();
+
+        turnService.getAllReprogrammed().forEach(x->list.add(TurnDto.classToDto(x)));
+
         return new ResponseEntity<>(turnService.getAllReprogrammed(), HttpStatus.ACCEPTED);
     }
 
