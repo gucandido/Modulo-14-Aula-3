@@ -34,4 +34,7 @@ public class DentistService {
         return repository.findDentistsByTurnsDayHavingTwoMore(day);
     }
 
+    public Dentist getDentistById(Long id){
+        return repository.findById(id).orElse(null);
+    }
 }
