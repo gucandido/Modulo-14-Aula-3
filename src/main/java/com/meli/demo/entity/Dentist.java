@@ -10,7 +10,8 @@ public class Dentist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_dentist;
+    @Column(name = "id_dentist")
+    private Long idDentist;
 
     private String name;
 
@@ -46,12 +47,12 @@ public class Dentist {
         this.code_mp = code_mp;
     }
 
-    public Long getId_dentist() {
-        return id_dentist;
+    public Long getIdDentist() {
+        return idDentist;
     }
 
-    public void setId_dentist(Long id_dentist) {
-        this.id_dentist = id_dentist;
+    public void setIdDentist(Long id_dentist) {
+        this.idDentist = id_dentist;
     }
 
     public String getName() {

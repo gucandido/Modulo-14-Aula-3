@@ -17,7 +17,7 @@ public class TurnStatusService {
         this.repository = repository;
     }
 
-    public void createNewStatus(TurnStatus status){
+    public void saveTurnStatus(TurnStatus status){
         repository.save(status);
     }
 

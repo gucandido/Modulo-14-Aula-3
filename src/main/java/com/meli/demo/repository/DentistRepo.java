@@ -13,7 +13,7 @@ import java.util.List;
 public interface DentistRepo extends JpaRepository<Dentist, Long> {
 
     @Query("select d " +
-            "from Dentist d join Diary dr on d.id_dentist = dr.dentist.id_dentist " +
+            "from Dentist d join Diary dr on d.idDentist = dr.dentist.idDentist " +
                             "join Turn t on dr.id_diary = t.diary.id_diary " +
             "where t.day = :day " +
             "group by d " +

@@ -18,7 +18,7 @@ public class PatientService {
         this.repository = repository;
     }
 
-    public void createNewPatient(Patient patient){
+    public void savePatient(Patient patient){
         repository.save(patient);
     }
 
