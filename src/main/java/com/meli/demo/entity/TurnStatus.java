@@ -50,9 +50,9 @@ public class TurnStatus {
         this.description = description;
     }
 
-    public List<Turn> getTurns() {
+    /*public List<Turn> getTurns() {
         return turns;
-    }
+    }*/
 
     public void setTurns(List<Turn> turns) {
         this.turns = turns;
