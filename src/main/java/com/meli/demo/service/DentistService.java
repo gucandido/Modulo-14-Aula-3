@@ -5,6 +5,7 @@ import com.meli.demo.repository.DentistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,6 +28,10 @@ public class DentistService {
 
     public List<Dentist> getAll(){
         return repository.findAll();
+    }
+
+    public List<Dentist> getAllByDayHavingTwoMore(LocalDate day){
+        return repository.findDentistsByTurnsDayHavingTwoMore(day);
     }
 
 }

@@ -25,6 +25,9 @@ public class Turn {
     @JoinColumn(name = "id_patient", nullable = false)
     private Patient patient;
 
+    public Turn() {
+    }
+
     public Turn(LocalDate day, Diary diary, TurnStatus turn_status, Patient patient) {
         this.day = day;
         this.diary = diary;
@@ -48,9 +51,9 @@ public class Turn {
         this.day = day;
     }
 
-    public Diary getDiary() {
+    /*public Diary getDiary() {
         return diary;
-    }
+    }*/
 
     public void setDiary(Diary diary) {
         this.diary = diary;
@@ -64,9 +67,9 @@ public class Turn {
         this.turn_status = turn_status;
     }
 
-    public Patient getPatient() {
+    /*public Patient getPatient() {
         return patient;
-    }
+    }*/
 
     public void setPatient(Patient patient) {
         this.patient = patient;

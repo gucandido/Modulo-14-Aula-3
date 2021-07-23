@@ -33,9 +33,19 @@ public class TestController {
     @Autowired
     private TurnService turnService;
 
-    @GetMapping("get")
+    @GetMapping("dentist")
     public ResponseEntity<?> getDentists(){
         return new ResponseEntity<>(dentistService.getAll(), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("patients")
+    public ResponseEntity<?> getPatients(){
+        return new ResponseEntity<>(patientService.getAllByDay(LocalDate.of(2021,Month.JULY,24)), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("dentist/day")
+    public ResponseEntity<?> getDentistsByDayHavingTwoMore(){
+        return new ResponseEntity<>(dentistService.getAllByDayHavingTwoMore(LocalDate.of(2021,Month.JULY,24)), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("post")
