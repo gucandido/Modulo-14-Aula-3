@@ -218,15 +218,15 @@ public class AppController {
         Turn tr1_p2 = new Turn(LocalDate.of(2021,Month.SEPTEMBER,1),dr2,t3,p2);
         Turn tr2_p2 = new Turn(LocalDate.of(2021,Month.MARCH,22),dr2,t1,p2);
         Turn tr3_p2 = new Turn(LocalDate.of(2021,Month.APRIL,10),dr2,t1,p2);
-        Turn tr4_p2 = new Turn(LocalDate.of(2021,Month.JULY,30),dr2,t3,p2);
+        Turn tr4_p2 = new Turn(LocalDate.of(2021,Month.JULY,24),dr2,t3,p2);
 
         Turn tr1_p3 = new Turn(LocalDate.of(2021,Month.JANUARY,10),dr1,t1,p3);
         Turn tr2_p3 = new Turn(LocalDate.of(2021,Month.FEBRUARY,5),dr1,t1,p3);
         Turn tr3_p3 = new Turn(LocalDate.of(2021,Month.MAY,2),dr1,t1,p3);
-        Turn tr4_p3 = new Turn(LocalDate.of(2021,Month.MAY,22),dr1,t1,p3);
+        Turn tr4_p3 = new Turn(LocalDate.of(2021,Month.JULY,15),dr1,t1,p3);
 
         Turn tr1_p4 = new Turn(LocalDate.of(2021,Month.JULY,24),dr2,t3,p4);
-        Turn tr2_p4 = new Turn(LocalDate.of(2021,Month.JULY,22),dr2,t1,p4);
+        Turn tr2_p4 = new Turn(LocalDate.of(2021,Month.JULY,24),dr2,t1,p4);
         Turn tr3_p4 = new Turn(LocalDate.of(2021,Month.AUGUST,24),dr2,t3,p4);
         Turn tr4_p4 = new Turn(LocalDate.of(2021,Month.SEPTEMBER,24),dr2,t3,p4);
 
